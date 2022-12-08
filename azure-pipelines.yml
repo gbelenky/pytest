@@ -30,6 +30,12 @@ steps:
   inputs:
     versionSpec: $(pythonVersion)
 
+# Install pytest
+- bash: pip install -U pytest
+
+# Install pytest-cov
+- bash: pip install pytest-cov 
+
 # Run tests
 - bash: pytest --doctest-modules --junitxml=junit/test-results.xml --cov=. --cov-report=xml
   displayName: Run tests
