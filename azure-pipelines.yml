@@ -1,6 +1,6 @@
 # We'll define some variables for later use
 variables:
-  pythonVersion: 3.7
+  pythonVersion: 3.10
   package: simple_package
   srcDirectory: .
   testsDirectory: .
@@ -13,13 +13,13 @@ trigger:
   paths:
     include:
     - .azure-pipelines/simple_package.0-basic-build.yml
-    - src/simple_package/*
-    - tests/simple_package/*
+#    - src/simple_package/*
+#    - tests/simple_package/*
 
-# Run on a Microsoft-hosted agent running Ubuntu-16.04
+# Run on a Microsoft-hosted agent running ubuntu-20.04
 # https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/hosted?view=azure-devops
 pool:
-  vmImage: ubuntu-16.04
+  vmImage: ubuntu-20.04
 
 # Steps are the specific tasks that execute code and do things
 steps:
