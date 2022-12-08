@@ -1,0 +1,36 @@
+# We'll define some variables for later use
+variables:
+  pythonVersion: 3.7
+  package: simple_package
+  srcDirectory: .
+  testsDirectory: .
+
+# Trigger only when simple_package or its build has been modified
+trigger:
+  branches:
+    include:
+      - "*"       # We're only uploading to build artifacts, so it's safe to trigger on all branches
+  paths:
+    include:
+    - .azure-pipelines/simple_package.0-basic-build.yml
+    - src/simple_package/*
+    - tests/simple_package/*
+
+# Run on a Microsoft-hosted agent running Ubuntu-16.04
+# https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/hosted?view=azure-devops
+pool:
+  vmImage: ubuntu-16.04
+
+# Steps are the specific tasks that execute code and do things
+steps:
+
+# Use a specific Python version
+- task: UsePythonVersion@0
+  displayName: Use Python $(pythonVersion)
+  inputs:
+    versionSpec: $(pythonVersion)
+
+# Run tests
+- bash: pytest --doctest-modules --junitxml=junit/test-results.xml --cov=. --cov-report=xml
+  displayName: Run tests
+  workingDirectory: $(testsDirectory)
