@@ -32,9 +32,11 @@ steps:
 
 # Install pytest
 - bash: pip install -U pytest
+  displayName: Install pytest
 
 # Install pytest-cov
 - bash: pip install pytest-cov 
+  displayName: Install pytest-cov
 
 # Run tests
 - bash: pytest --doctest-modules --junitxml=junit/test-results.xml --cov=. --cov-report=xml
